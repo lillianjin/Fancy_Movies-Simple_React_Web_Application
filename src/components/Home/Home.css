@@ -1,0 +1,15 @@
+.gallery{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: space-between;
+}
+
+.gallery-item{
+  height: 30em;
+  width: 25%;
+  margin-bottom: 5px;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,0.9);
+  background: #222;
+  color: #F2F2F2;
+}
