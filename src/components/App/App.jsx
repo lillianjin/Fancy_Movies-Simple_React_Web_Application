@@ -5,7 +5,6 @@ import './App.css';
 // Include your new Components here
 import Home from '../Home/Home.jsx';
 
-
 class App extends Component {
 
   render() {
