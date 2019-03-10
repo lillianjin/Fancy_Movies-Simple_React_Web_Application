@@ -32,7 +32,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
-  font-size: 3em;
+  font-size: 4em;
   font-weight: bold;
   font-family: 'Righteous', cursive;
 }
@@ -40,7 +40,7 @@
 .gallery{
   position: relative;
   top: 20em;
-  left: 20%;
+  left: 22%;
   width: 75%;
   padding: 1em 0.5em;
   display: flex;
@@ -94,17 +94,46 @@
   position: absolute;
   top: 20em;
   left: 2%;
-  width: 15%;
+  width: 18%;
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .genre-list{
+  text-align: left;
   position: relative;
-  padding: 0.5em 0;
+  /* padding: 0.5em 1em; */
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .genre-list h3{
-  padding: 0;
+  padding: 0.5em 0.3em;
   margin: 0;
+  font-size: 2em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.genre{
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 2.5em;
+  border: none;
+  cursor: pointer;
+}
+
+.genre-name{
+  margin: 0 0.5em;
+  padding: 0;
+  text-align: left;
+  font-size: 1.5em;
+  line-height: 1.5em;
+}
+
+.genre:hover{
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.active{
+  background-color: rgba(0, 0, 0, 0.05);
+  font-weight: bold;
 }

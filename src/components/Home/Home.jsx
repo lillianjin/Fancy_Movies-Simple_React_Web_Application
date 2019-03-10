@@ -8,22 +8,28 @@ import {apiURL, apiKey} from '../../config.js'
 
 
 class Home extends Component {
-
   constructor(props){
     super(props);
 
     this.state = {
       movieList: [],
       genreList: [],
+      currGenre: 0,
     };
+  }
+
+  componentDidMount() {
+    this.getGenre();
+    this.getMovie();
   }
 
   getMovie() {
     // console.log(apiURL, apiKey);
-    axios.get(`${apiURL}/movie/popular${apiKey}`).then((response) => {
+    axios.get(`${apiURL}/movie/popular${apiKey}&language='en-us'`).then((response) => {
         // console.log(response.data.results);
         this.setState({
-          movieList: response.data.results
+          movieList: response.data.results,
+          currGenre: 0
         });
       }).catch((error) => {
         console.log(error);
@@ -32,21 +38,43 @@ class Home extends Component {
 
   getGenre() {
     // console.log(apiURL, apiKey);
-    axios.get(`${apiURL}/genre/movie/list${apiKey}&language=en-US`).then((response) => {
+    axios.get(`${apiURL}/genre/movie/list${apiKey}&language='en-us'`).then((response) => {
         // console.log(response.data.genres);
         this.setState({
-          genreList: response.data.genres
+          genreList: response.data.genres,
         });
       }).catch((error) => {
         console.log(error);
     });
   }
 
+  getMovieByGenre(ob) {
+    axios.get(`${apiURL}/discover/movie${apiKey}&language='en-us'&with_genres=${ob.id}`).then((response) => {
+        // console.log(response.data.results);
+        this.setState({
+          movieList: response.data.results,
+          currGenre: ob.id
+        });
+      }).catch((error) => {
+        console.log(error);
+    });
+    // console.log(this.state.currGenre);
+  }
+
+  toggleClass() {
+    const cur = this.state.active;
+    this.setState({ active: !cur});
+  }
+
   render() {
-    this.getMovie();
-    this.getGenre();
-    const genres = this.state.genreList;
-    console.log(this.state.movieList);
+    const genres = this.state.genreList.map((genre, index)=> {
+      return (
+        <div className={this.state.currGenre === genre.id ? 'active genre' : 'genre'} onClick={() => this.getMovieByGenre(genre)} key={ genre.id }>
+          <p className='genre-name'> { genre.name }</p>
+        </div>
+      )
+    });
+
     const imgURL= 'http://image.tmdb.org/t/p/original';
     const movies= this.state.movieList.map((movie, index)=> {
       return (
@@ -69,6 +97,10 @@ class Home extends Component {
           <div className="filter-list">
             <div className="genre-list">
               <h3> Genre </h3>
+              <div className={this.state.currGenre === 0 ? 'active genre' : 'genre'} onClick={() => this.getMovie()} key={ 0 }>
+                <p className='genre-name'> All Genres</p>
+              </div>
+              {genres}
             </div>
           </div>
           <div className='gallery'>
