@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { Button, Input } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import './Home.css';
+import Details from '../Details/Details.jsx';
+import PropTypes from 'prop-types';
 
 import axios from 'axios'
 import {apiURL, apiKey} from '../../config.js'
-import { faList, faImage, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faList, faImage, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Home extends Component {
@@ -17,6 +20,10 @@ class Home extends Component {
       genreList: [],
       currGenre: 0,
     };
+
+    this.getMovie = this.getMovie.bind(this);
+    this.getGenre = this.getGenre.bind(this);
+    this.getMovieByGenre = this.getMovieByGenre.bind(this)
   }
 
   componentDidMount() {
@@ -59,13 +66,8 @@ class Home extends Component {
       }).catch((error) => {
         console.log(error);
     });
-    // console.log(this.state.currGenre);
   }
 
-  toggleClass() {
-    const cur = this.state.active;
-    this.setState({ active: !cur});
-  }
 
   render() {
     const genres = this.state.genreList.map((genre, index)=> {
@@ -77,14 +79,30 @@ class Home extends Component {
     });
 
     const imgURL= 'http://image.tmdb.org/t/p/original';
-    const movies= this.state.movieList.map((movie, index)=> {
+    const movieList = this.state.movieList;
+    console.log(movieList);
+    const movies= movieList.map((movie, index)=> {
       return (
-        <div className='gallery-item' key={ index }>
-            <img className='poster' src={ imgURL + movie.poster_path } alt='movie poster'></img>
-            <div className='tag'>
-              <h3 className='movie-name'>{ movie.original_title }</h3>
-              <p className='movie-rating'>{ movie.vote_average }/10</p>
-            </div>
+        <div className="item-wrapper" key = { index }>
+          <Link to={
+            {
+              pathname: `/details/${ index }`,
+              state: {
+                movieList: movieList,
+              }
+            }
+          }
+            className='gallery-item'
+            key={ movie.id }>
+              <img className='poster' src={ imgURL + movie.poster_path } alt='movie poster'></img>
+              <div className='tag'>
+                <h3 className='movie-name'>{ movie.original_title }</h3>
+                <p className='movie-rating'>
+                <FontAwesomeIcon icon={faStar} size="sm" />
+                &nbsp;{ movie.vote_average }/10
+                </p>
+              </div>
+          </Link>
         </div>
         )
       });
@@ -92,48 +110,26 @@ class Home extends Component {
       return(
         <div className='Home'>
           <div className='header'>
+          <Link to = '/'>
             <img className='logo' src='https://www.themoviedb.org/assets/2/v4/logos/312x276-primary-green-74212f6247252a023be0f02a5a45794925c3689117da9d20ffe47742a665c518.png' alt='logo'></img>
-            <h1 className='title'>Fancy Movies</h1>
-            <div className="toggle-container">
-              <Link to="/">
-                <Button
-                  title="Gallery View"
-                  className={window.location.pathname==='/' ? "toggle-active": ""}>
-                  <FontAwesomeIcon className="toggle-icon" icon={faImage} size="2x" />
-                </Button>
-              </Link>
-              <Link to="/list">
-                <Button
-                  title="List View"
-                  className={window.location.pathname==='/list' ? "toggle-active": ""}>
-                <FontAwesomeIcon className="toggle-icon" icon={faList} size="2x" />
-                </Button>
-              </Link>
-            </div>
+          </Link>
+          <h1 className='title'>Fancy Movies</h1>
+          <div className="toggle-container">
+            <Link to="/">
+              <Button
+                title="Gallery View"
+                className={window.location.pathname==='/' ? "toggle-active toggle-button": "toggle-button"}>
+                <FontAwesomeIcon className="toggle-icon" icon={faImage} size="2x" />
+              </Button>
+            </Link>
+            <Link to="/list">
+              <Button
+                title="List View"
+                className={window.location.pathname==='/list' ? "toggle-active toggle-button": "toggle-button"}>
+              <FontAwesomeIcon className="toggle-icon" icon={faList} size="2x" />
+              </Button>
+            </Link>
           </div>
-          <div className='search-container'>
-            <div className='search-bar'>
-              <FontAwesomeIcon className='search-icon' icon={faSearch} size="2x" />
-              <input type="text" placeholder="Search Movies" className="search-input" />
-            </div>
-          </div>
-          <div className='sort-container-1'>
-            <p>Rating:&nbsp;</p>
-            <form className='sort-form'>
-              <select className='sort-rating'>
-                <option>Asending</option>
-                <option>Desending</option>
-              </select>
-            </form>
-          </div>
-          <div className='sort-container-2'>
-            <p>Popularity:&nbsp;</p>
-            <form className='sort-form'>
-              <select className='sort-pop'>
-                <option>Asending</option>
-                <option>Desending</option>
-              </select>
-            </form>
           </div>
           <div className="filter-list">
             <div className="genre-list">
@@ -149,8 +145,12 @@ class Home extends Component {
           </div>
         </div>
     )
-
   }
+
+}
+
+Home.propTypes = {
+
 }
 
 export default Home

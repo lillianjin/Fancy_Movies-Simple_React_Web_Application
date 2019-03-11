@@ -4,6 +4,9 @@ import './App.css';
 
 // Include your new Components here
 import Home from '../Home/Home.jsx';
+import List from '../List/List.jsx';
+import Details from '../Details/Details.jsx';
+import Details0 from '../Details/Details0.jsx';
 
 class App extends Component {
 
@@ -12,6 +15,9 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home}/>
+            <Route exact path="/list" component={List}/>
+            <Route path="/details/:index" component={Details}/>
+            <Route path="/details0/:index" component={Details0}/>
         </Switch>
       </Router>
     );
