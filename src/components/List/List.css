@@ -78,6 +78,11 @@
   color: black;
 }
 
+.search-submit:focus {
+  outline:0;
+}
+
+
 .toggle-container{
   height: 2.5vw;
   min-width: 6vw;
