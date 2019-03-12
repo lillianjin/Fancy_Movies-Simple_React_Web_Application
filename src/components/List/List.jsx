@@ -115,6 +115,8 @@ class List extends Component {
   }
 
   render() {
+    console.log(window.location);
+
     const imgURL= 'https://image.tmdb.org/t/p/original';
     const totalCount = this.state.total_res;
 

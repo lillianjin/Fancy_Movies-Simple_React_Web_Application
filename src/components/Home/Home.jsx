@@ -70,6 +70,8 @@ class Home extends Component {
 
 
   render() {
+    console.log(movieList);
+    console.log(window.location);
     const genres = this.state.genreList.map((genre, index)=> {
       return (
         <div className={this.state.currGenre === genre.id ? 'active genre' : 'genre'} onClick={() => this.getMovieByGenre(genre)} key={ genre.id }>
@@ -80,7 +82,6 @@ class Home extends Component {
 
     const imgURL= 'https://image.tmdb.org/t/p/original';
     const movieList = this.state.movieList;
-    console.log(movieList);
     const movies= movieList.map((movie, index)=> {
       return (
         <div className="item-wrapper" key = { index }>
