@@ -14,10 +14,10 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Home}/>
-            <Route exact path="/list" component={List}/>
-            <Route path="/details/:index" component={Details}/>
-            <Route path="/details0/:index" component={Details0}/>
+          <Route exact path="/498_mp2/" component={Home}/>
+            <Route exact path="/498_mp2/list" component={List}/>
+            <Route path="/498_mp2/details/:index" component={Details}/>
+            <Route path="/498_mp2/details0/:index" component={Details0}/>
         </Switch>
       </Router>
     );
