@@ -78,7 +78,7 @@ class Home extends Component {
       )
     });
 
-    const imgURL= 'http://image.tmdb.org/t/p/original';
+    const imgURL= 'https://image.tmdb.org/t/p/original';
     const movieList = this.state.movieList;
     console.log(movieList);
     const movies= movieList.map((movie, index)=> {

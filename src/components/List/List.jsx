@@ -115,7 +115,7 @@ class List extends Component {
   }
 
   render() {
-    const imgURL= 'http://image.tmdb.org/t/p/original';
+    const imgURL= 'https://image.tmdb.org/t/p/original';
     const totalCount = this.state.total_res;
 
     const movies= this.state.movieList.map((movie, index)=> {

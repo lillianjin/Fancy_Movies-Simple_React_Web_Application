@@ -61,7 +61,7 @@ class Details extends Component {
   }
 
   render() {
-    const imgURL= 'http://image.tmdb.org/t/p/original';
+    const imgURL= 'https://image.tmdb.org/t/p/original';
       return(
         <div className='Details'>
           <div className='header'>
