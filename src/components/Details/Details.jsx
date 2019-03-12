@@ -65,20 +65,22 @@ class Details extends Component {
       return(
         <div className='Details'>
           <div className='header'>
+            <Link to = '/'>
             <img className='logo' src='https://www.themoviedb.org/assets/2/v4/logos/312x276-primary-green-74212f6247252a023be0f02a5a45794925c3689117da9d20ffe47742a665c518.png' alt='logo'></img>
+            </Link>
             <h1 className='title'>Fancy Movies</h1>
             <div className="toggle-container">
               <Link to="/">
                 <Button
                   title="Gallery View"
-                  className={window.location.pathname==='/' ? "toggle-active toggle-button": "toggle-button"}>
+                  className={window.location.hash==='#/' ? "toggle-active toggle-button": "toggle-button"}>
                   <FontAwesomeIcon className="toggle-icon" icon={faImage} size="2x" />
                 </Button>
               </Link>
               <Link to="/list">
                 <Button
                   title="List View"
-                  className={window.location.pathname==='/list' ? "toggle-active toggle-button": "toggle-button"}>
+                  className={window.location.hash==='#/list' ? "toggle-active toggle-button": "toggle-button"}>
                 <FontAwesomeIcon className="toggle-icon" icon={faList} size="2x" />
                 </Button>
               </Link>

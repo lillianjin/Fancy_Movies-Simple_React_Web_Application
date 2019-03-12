@@ -72,14 +72,14 @@ class Details0 extends Component {
                 <Link to="/">
                   <Button
                     title="Gallery View"
-                    className={window.location.pathname==='/' ? "toggle-active toggle-button": "toggle-button"}>
+                    className={window.location.hash==='#/' ? "toggle-active toggle-button": "toggle-button"}>
                     <FontAwesomeIcon className="toggle-icon" icon={faImage} size="2x" />
                   </Button>
                 </Link>
                 <Link to="/list">
                   <Button
                     title="List View"
-                    className={window.location.pathname==='/list' ? "toggle-active toggle-button": "toggle-button"}>
+                    className={window.location.hash==='#/list' ? "toggle-active toggle-button": "toggle-button"}>
                   <FontAwesomeIcon className="toggle-icon" icon={faList} size="2x" />
                   </Button>
                 </Link>
